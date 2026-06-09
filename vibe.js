@@ -13,8 +13,36 @@ createIcon[0].addEventListener('click', () => {
 
 button[1].addEventListener("click", () => {
     createBox.style.animation = "popcancel 0.1s linear forwards";
-    // window.location.reload();
 })
+
+const createTask = (name, date) => {
+    let list = document.createElement("li");
+    list.classList.add("item");
+    
+    let cbox = document.createElement("div");
+    cbox.classList.add("checkbox");
+    
+    let inputCheck = document.createElement("input");
+    inputCheck.id = "newTask";
+    inputCheck.name = "tasks";
+    inputCheck.type = "checkbox";
+    
+    let content = document.createElement("div");
+    content.classList.add("content");
+    
+    let label1 = document.createElement("label");
+    let label2 = document.createElement("label");
+    label1.textContent = savedName;
+    label2.textContent = savedDate;
+    
+    taskListing.appendChild(list);
+    list.appendChild(cbox);
+    cbox.appendChild(inputCheck);
+    list.appendChild(content);
+    content.appendChild(label1);
+    content.appendChild(label2);
+}
+
 
 const inputName = document.getElementById("taskName");
 const inputDesc = document.getElementById("taskDesc");
@@ -24,59 +52,30 @@ let main = document.querySelector("main");
 let taskListing = document.createElement("ul");
 taskListing.classList.add("listings");
 main.appendChild(taskListing);
+// console.log(localStorage.getItem("taskName"));
+
+const savedName = localStorage.getItem("taskName");
+const savedDate = localStorage.getItem('taskDate');
+const savedDesc = localStorage.getItem('taskDesc');
+
+if (savedName) {
+    createTask(savedName, savedDate);
+}
 
 formCreation.addEventListener('submit', () => {
     event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
-
+    
     if (inputDesc.value === "") {inputDesc.value = "undefined";}
-
+    
     localStorage.setItem('taskName', inputName.value);
     localStorage.setItem('taskDate', formatted);
     localStorage.setItem('taskDesc', inputDesc.value);
-    
-    const savedName = localStorage.getItem('taskName');
-    const savedDate = localStorage.getItem('taskDate');
-    const savedDesc = localStorage.getItem('taskDesc');
-    // document.querySelectorAll(".content label")[0].textContent = savedName;
-    // document.querySelectorAll(".content label")[1].textContent = savedDate;
-    // console.log(savedName);
-    // console.log(savedDate);
-    // console.log(savedDesc);
 
-    
-    // console.log(taskListing);
-    // console.log(a);
-    // console.log(taskListing[a]);
-    
-    
-
-    let list = document.createElement("li");
-    list.classList.add("item");
-
-    let cbox = document.createElement("div");
-    cbox.classList.add("checkbox");
-
-    let inputCheck = document.createElement("input");
-    inputCheck.id = "newTask";
-    inputCheck.name = "tasks";
-    inputCheck.type = "checkbox";
-
-    let content = document.createElement("div");
-    content.classList.add("content");
-
-    let label1 = document.createElement("label");
-    let label2 = document.createElement("label");
-    label1.textContent = savedName;
-    label2.textContent = savedDate;
-
-    taskListing.appendChild(list);
-    list.appendChild(cbox);
-    cbox.appendChild(inputCheck);
-    list.appendChild(content);
-    content.appendChild(label1);
-    content.appendChild(label2);
+    createTask(savedName, savedDate);
 })
+
+
 
 const navDate = document.querySelectorAll(".date p");
 
