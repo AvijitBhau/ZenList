@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./vibe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="parent">
+        <section id="createTask">
+            <h2>CREATE NEW GOAL</h2>
+            <div class="taskBox">
+                <form action="" id="taskForm">
+                    <label for="taskName">Name: <span style="color: red;">*</span> </label>
+                    <input type="text" name="taskName" id="taskName" placeholder="Enter goal (eg. Physics Class)" required
+                        autocomplete="off"><br>
+                    <label for="taskDate">Choose date and time: <span style="color: red;">*</span></label>
+                    <input type="datetime-local" name="taskDate" id="taskDate" placeholder="Choose date and time"
+                        max="2026-12-31T23:59" required>
+                    <label for="taskDesc">Description: </label>
+                    <input type="text" name="taskDesc" id="taskDesc" placeholder="Enter details of your goal... (Optional) "><br>
+                    <div class="btns">
+                        <button type="submit">CREATE +</button>
+                        <button type="reset">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <header>
+            <nav>
+                <div class="date">
+                    <p>Monday | Oct 31, 2016 | 2:30 A.M.</p>
+                </div>
+                <div class="logo">
+                    <h2>DAILY FLOW</h2>
+                </div>
+                <div class="icons">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <h3>MY DAY</h3>
+            <div class="slider">
+                <p>UPCOMING</p>
+                <p>Completed</p>
+            </div>
+            <ul class="listings">
+
+                <!-- <li class="item">
+                    <div class="checkbox">
+                        <input type="checkbox" name="tasks" id="newTask">
+                    </div>
+                    <div class="content">
+                        <label for="tasks">This</label>
+                        <label for="tasks">OK</label>
+                    </div>
+                </li> -->
+
+            </ul>
+        </main>
+        <footer>
+            <div class="overlay">
+                <p>+</p>
+            </div>
+            <div class="navbar">
+                <i class="fa-solid fa-house"></i>
+                <i class="fa-solid fa-list-check"></i>
+                <i class="fa-solid fa-calendar"></i>
+                <i class="fa-solid fa-user fa-bounce"></i>
+            </div>
+        </footer>
+    </div>
+</body>
+<script src="./vibe.js"></script>
+
+</html>
