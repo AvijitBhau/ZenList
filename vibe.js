@@ -43,6 +43,18 @@ const createTask = (name, date) => {
     content.appendChild(label2);
 }
 
+const dustbin = document.getElementById("dustbin");
+
+const removeTask = () => {
+    if (document.getElementById("newTask").checked) {
+        // document.getElementsByClassName("list")[0].remove();
+        console.log("checked")
+    }
+}
+
+dustbin.addEventListener('click', () => {
+    removeTask();
+})
 
 const inputName = document.getElementById("taskName");
 const inputDesc = document.getElementById("taskDesc");
@@ -69,7 +81,7 @@ formCreation.addEventListener('submit', () => {
     if (inputDesc.value === "") {inputDesc.value = "undefined";}
     
     localStorage.setItem('taskName', inputName.value);
-    localStorage.setItem('taskDate', formatted);
+    localStorage.setItem('taskDate', inputDate.value);
     localStorage.setItem('taskDesc', inputDesc.value);
 
     createTask(savedName, savedDate);
