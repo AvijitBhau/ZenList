@@ -31,6 +31,50 @@ h3 i {
     transform: scale(0.9);
     color: rgb(74, 74, 74);
     cursor: pointer;
+    user-select: none;
+    cursor: not-allowed;
+}
+
+#deleteDB {
+    position: absolute;
+    border: 1px solid black;
+    min-height: 15%;
+    width: 70%;
+    margin: 20px;
+    background-color: rgb(232, 255, 232);
+    overflow-x: hidden;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(112, 112, 112);
+    top: 35%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    padding: 0 10%;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: large;
+    font-weight: 700;
+    display: none;
+}
+
+#delbtns {
+    margin: 0 0 20px 5px;
+}
+
+#delbtns button {
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: medium;
+    border: 2px solid darkgreen;
+    cursor: pointer;
+}
+
+#delbtns button:first-child {
+    background-color: rgb(0, 82, 0);
+    color: white;
 }
 
 .overlay {
@@ -297,4 +341,11 @@ footer i {
     transform: scale(1.2);
     color: rgb(74, 74, 74);
     cursor: pointer;
+    padding: 7%;
+    border-radius: 5px;
+}
+
+footer i:focus, footer i:active, .active {
+    border-top: 2px solid darkgreen;
+    color: rgb(53, 53, 53);
 }

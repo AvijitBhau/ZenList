@@ -48,12 +48,21 @@ const dustbin = document.getElementById("dustbin");
 const removeTask = () => {
     if (document.getElementById("newTask").checked) {
         // document.getElementsByClassName("list")[0].remove();
-        console.log("checked")
+        console.log("checked");
     }
 }
 
 dustbin.addEventListener('click', () => {
+    document.getElementById("deleteDB").style.display = "flex";
+})
+
+
+document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => {
     removeTask();
+})
+
+document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => {
+    document.getElementById("deleteDB").style.display = "";
 })
 
 const inputName = document.getElementById("taskName");
@@ -108,3 +117,13 @@ const currentTime = () => {
 currentTime();
 
 
+const footerNav = document.querySelectorAll(".fa-solid");
+
+footerNav.forEach(icons => {
+    icons.addEventListener('click', () => {
+        footerNav.forEach(icon => {
+            icon.classList.remove("active");
+        })
+        icons.classList.add("active");
+    })
+})
