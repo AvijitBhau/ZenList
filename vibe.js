@@ -19,7 +19,11 @@ button[1].addEventListener("click", () => {
 const inputName = document.getElementById("taskName");
 const inputDesc = document.getElementById("taskDesc");
 const formCreation = document.getElementById("taskForm");
-let a = 0;
+
+let main = document.querySelector("main");
+let taskListing = document.createElement("ul");
+taskListing.classList.add("listings");
+main.appendChild(taskListing);
 
 formCreation.addEventListener('submit', () => {
     event.preventDefault();
@@ -46,7 +50,7 @@ formCreation.addEventListener('submit', () => {
     // console.log(taskListing[a]);
     
     
-    let taskListing = document.getElementsByClassName("listings");
+
     let list = document.createElement("li");
     list.classList.add("item");
 
@@ -66,13 +70,12 @@ formCreation.addEventListener('submit', () => {
     label1.textContent = savedName;
     label2.textContent = savedDate;
 
-    taskListing[a].appendChild(list);
+    taskListing.appendChild(list);
     list.appendChild(cbox);
     cbox.appendChild(inputCheck);
     list.appendChild(content);
     content.appendChild(label1);
     content.appendChild(label2);
-    a++;
 })
 
 const navDate = document.querySelectorAll(".date p");
