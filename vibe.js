@@ -8,11 +8,14 @@ inputDate.min = formatted;
 
 createIcon[0].addEventListener('click', () => {
     createBox.style.animation = "popup 0.1s linear forwards";
+    document.body.style.pointerEvents = "none";
+    createBox.style.pointerEvents = "all";
     formCreation.reset();
 })
 
 button[1].addEventListener("click", () => {
     createBox.style.animation = "popcancel 0.1s linear forwards";
+    document.body.style.pointerEvents = "all";
 })
 
 const createTask = (name, date) => {
@@ -47,7 +50,6 @@ const dustbin = document.getElementById("dustbin");
 
 const removeTask = () => {
     if (document.getElementById("newTask").checked) {
-        // document.getElementsByClassName("list")[0].remove();
         console.log("checked");
     }
 }
@@ -57,7 +59,7 @@ dustbin.addEventListener('click', () => {
     document.getElementById("parent").style.pointerEvents = "none";
     document.getElementById("deleteDB").style.pointerEvents = "all";
     document.querySelector(".bg-cover").style.display = "flex";
-    // document.getElementById("parent").style.background = "black";
+    // document.body.style.scrollBehavior = "none";
 
 })
 

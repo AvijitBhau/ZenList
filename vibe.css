@@ -215,10 +215,42 @@ ul {
     /* border: 2px solid red; */
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .checkbox input {
     transform: scale(1.5);
+}
+
+#newTask {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border: .8px solid green;
+    border-radius: 20%;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+#newTask::before {
+    content: '';
+    background-color: darkgreen;
+    height: 20px;
+    width: 20px;
+    border-radius: 20%;
+    background-image: url("./assets/check_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png");
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+    scale: 0;
+    opacity: 0;
+    transition: 200ms ease;
+}
+
+#newTask:checked::before {
+    scale: 1;
+    opacity: 1;
 }
 
 .content {
