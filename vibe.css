@@ -4,6 +4,7 @@ body {
     box-sizing: border-box;
     background-color: #ecfbeb;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #parent {
@@ -32,7 +33,7 @@ h3 i {
     color: rgb(74, 74, 74);
     cursor: pointer;
     user-select: none;
-    cursor: not-allowed;
+    /* cursor: not-allowed; */
 }
 
 #deleteDB {
@@ -51,12 +52,15 @@ h3 i {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     padding: 0 10%;
     font-family: "Roboto Condensed", sans-serif;
     font-size: large;
     font-weight: 700;
     display: none;
+    /* transform: scale(0); */
+    animation: popover 0.1s linear forwards;
+
 }
 
 #delbtns {
@@ -114,27 +118,31 @@ header {
 nav {
     /* border: 2px solid red; */
     display: grid;
-    grid-template: 
-    "date icons"
-    "logo icons";
+    grid-template:
+        "date icons"
+        "logo icons";
 }
 
 .date {
     /* border: 2px solid blue; */
     grid-area: date;
 }
+
 .date p {
     margin: 0;
     font-family: "Roboto Condensed", sans-serif;
 }
+
 .logo {
     /* border: 2px solid green; */
     grid-area: logo;
     font-size: x-large;
 }
+
 .logo h2 {
     margin: 0;
 }
+
 .icons {
     /* border: 2px solid yellowgreen; */
     grid-area: icons;
@@ -144,7 +152,8 @@ nav {
     font-size: large;
 }
 
-header, main {
+header,
+main {
     padding: 5%;
 }
 
@@ -156,12 +165,6 @@ header, main {
     border-radius: 50px;
     background-color: #fff;
 }
-
-/* .slider p:first-child {
-    border: 2px solid;
-    width: 50%;
-    height: 100px;
-} */
 
 ul {
     /* border: 2px solid; */
@@ -176,9 +179,31 @@ ul {
     gap: 15px;
 }
 
+.no-task {
+    min-height: 20vh;
+    border: 2px solid #dff0da;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(205, 205, 205);
+    background-color: #fefff8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.bg-cover {
+    min-height: 100vh;
+    background-color: #ff0000;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.313);
+    display: none;
+}
+
 .item {
-    height: 10vh;
-    border: 2px solid #dff0da;;
+    min-height: 10vh;
+    border: 2px solid #dff0da;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(205, 205, 205);
     background-color: #fefff8;
@@ -263,6 +288,16 @@ ul {
     }
 }
 
+@keyframes popover {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 #createTask h2 {
     padding: 10% 0 5% 0;
@@ -341,11 +376,32 @@ footer i {
     transform: scale(1.2);
     color: rgb(74, 74, 74);
     cursor: pointer;
-    padding: 7%;
+    padding: 6%;
     border-radius: 5px;
 }
 
-footer i:focus, footer i:active, .active {
-    border-top: 2px solid darkgreen;
+footer i:focus,
+footer i:active,
+.active {
     color: rgb(53, 53, 53);
+    transform: translateY(-5px) scale(1.2);
+}
+
+.indicator {
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 4px;
+    background-color: darkgreen;
+    border-radius: 20px;
+    transition: left 0.3s ease;
+}
+
+
+
+
+@media (min-width: 450px) {
+    footer i {
+        padding: 0;
+    }
 }

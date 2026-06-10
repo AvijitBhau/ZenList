@@ -54,8 +54,12 @@ const removeTask = () => {
 
 dustbin.addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "flex";
-})
+    document.getElementById("parent").style.pointerEvents = "none";
+    document.getElementById("deleteDB").style.pointerEvents = "all";
+    document.querySelector(".bg-cover").style.display = "flex";
+    // document.getElementById("parent").style.background = "black";
 
+})
 
 document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => {
     removeTask();
@@ -63,6 +67,9 @@ document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => 
 
 document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "";
+    document.getElementById("parent").style.pointerEvents = "all";
+    document.querySelector(".bg-cover").style.display = "none";
+    
 })
 
 const inputName = document.getElementById("taskName");
@@ -83,8 +90,21 @@ if (savedName) {
     createTask(savedName, savedDate);
 }
 
+
+let nothingToShow = document.createElement("div");
+nothingToShow.classList.add("no-task");
+nothingToShow.textContent = "No tasks added yet!";
+taskListing.appendChild(nothingToShow);
+
+if (taskListing.children.length == 1) {
+    nothingToShow.style.display = "flex";
+}
+else {
+    nothingToShow.style.display = "none";
+}
+
 formCreation.addEventListener('submit', () => {
-    event.preventDefault();
+    // event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
     
     if (inputDesc.value === "") {inputDesc.value = "undefined";}
@@ -117,13 +137,19 @@ const currentTime = () => {
 currentTime();
 
 
-const footerNav = document.querySelectorAll(".fa-solid");
+const footerNav = document.querySelectorAll(".navbar i");
+const indicator = document.querySelector(".indicator");
 
+const moveIndicator = (button) => {
+    indicator.style.left = button.offsetLeft + (button.offsetWidth - indicator.offsetWidth) / 2 + "px";
+}
+moveIndicator(document.querySelector(".active"));
 footerNav.forEach(icons => {
     icons.addEventListener('click', () => {
         footerNav.forEach(icon => {
             icon.classList.remove("active");
         })
         icons.classList.add("active");
+        moveIndicator(icons);
     })
 })
