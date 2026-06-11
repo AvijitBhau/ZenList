@@ -57,7 +57,6 @@ const removeTask = () => {
 
 dustbin.addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "flex";
-    // document.getElementById("deleteDB").style.alignItems = "center";
     document.getElementById("parent").style.pointerEvents = "none";
     document.getElementById("deleteDB").style.pointerEvents = "all";
     document.querySelector(".bg-cover").style.display = "flex";
@@ -91,6 +90,17 @@ tasks.forEach(task => {
     createTask(task.name, task.date);
 })
 
+const refinedTimeForTask = () => {
+    const dateForTask = new Date(inputDate.value);
+    const date = dateForTask.toLocaleString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: 'numeric', 
+        minute: '2-digit'
+    });
+    return date;
+}
 
 
 let nothingToShow = document.createElement("div");
@@ -110,7 +120,7 @@ const saveTask = () => {
     
     tasks.push({
         name: inputName.value,
-        date: inputDate.value,
+        date: refinedTimeForTask(),
         desc: inputDesc.value
     });
     
@@ -118,12 +128,12 @@ const saveTask = () => {
 }
 
 formCreation.addEventListener('submit', () => {
+    // event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
     if (inputDesc.value === "") {inputDesc.value = "undefined";}
     saveTask();
-    createTask(inputName.value, inputDate.value);
+    createTask(inputName.value, refinedTimeForTask());
 })
-
 
 
 const navDate = document.querySelectorAll(".date p");
@@ -138,7 +148,7 @@ const currentTime = () => {
         minute: '2-digit'
         // second: '2-digit'
     });
-
+    
     navDate[0].textContent = `${dayName} | ${month} ${day}, ${year} | ${time}`;
 }
 
@@ -161,3 +171,4 @@ footerNav.forEach(icons => {
         moveIndicator(icons);
     })
 })
+
