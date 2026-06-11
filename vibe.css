@@ -196,7 +196,7 @@ ul {
 }
 
 .bg-cover {
-    min-height: 100vh;
+    min-height: 2300vh;
     background-color: #ff0000;
     position: absolute;
     z-index: 1;
@@ -226,7 +226,7 @@ ul {
     transform: scale(1.5);
 }
 
-#newTask {
+input[type="checkbox"] {
     appearance: none;
     height: 20px;
     width: 20px;
@@ -237,7 +237,7 @@ ul {
     cursor: pointer;
 }
 
-#newTask::before {
+input[type="checkbox"]::before {
     content: '';
     background-color: darkgreen;
     height: 20px;
@@ -252,7 +252,7 @@ ul {
     transition: 200ms ease;
 }
 
-#newTask:checked::before {
+input[type="checkbox"]:checked::before {
     scale: 1;
     opacity: 1;
 }

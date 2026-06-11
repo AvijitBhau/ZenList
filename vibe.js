@@ -57,6 +57,7 @@ const removeTask = () => {
 
 dustbin.addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "flex";
+    // document.getElementById("deleteDB").style.alignItems = "center";
     document.getElementById("parent").style.pointerEvents = "none";
     document.getElementById("deleteDB").style.pointerEvents = "all";
     document.querySelector(".bg-cover").style.display = "flex";
