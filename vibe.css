@@ -152,9 +152,13 @@ nav {
     font-size: large;
 }
 
-header,
+header {
+    padding: 5%;
+}
+
 main {
     padding: 5%;
+    margin: 0 0 50% 0;
 }
 
 .slider {

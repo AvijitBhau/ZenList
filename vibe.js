@@ -1,3 +1,4 @@
+
 const inputDate = document.getElementById("taskDate");
 const now = new Date();
 const formatted = now.toISOString().slice(0, 16);
@@ -10,12 +11,14 @@ createIcon[0].addEventListener('click', () => {
     createBox.style.animation = "popup 0.1s linear forwards";
     document.body.style.pointerEvents = "none";
     createBox.style.pointerEvents = "all";
+    document.body.style.overflow = "hidden";
     formCreation.reset();
 })
 
 button[1].addEventListener("click", () => {
     createBox.style.animation = "popcancel 0.1s linear forwards";
     document.body.style.pointerEvents = "all";
+    document.body.style.overflow = "";
 })
 
 const createTask = (name, date) => {
@@ -26,7 +29,6 @@ const createTask = (name, date) => {
     cbox.classList.add("checkbox");
     
     let inputCheck = document.createElement("input");
-    inputCheck.id = "newTask";
     inputCheck.name = "tasks";
     inputCheck.type = "checkbox";
     
@@ -35,8 +37,8 @@ const createTask = (name, date) => {
     
     let label1 = document.createElement("label");
     let label2 = document.createElement("label");
-    label1.textContent = savedName;
-    label2.textContent = savedDate;
+    label1.textContent = name;
+    label2.textContent = date;
     
     taskListing.appendChild(list);
     list.appendChild(cbox);
@@ -49,9 +51,8 @@ const createTask = (name, date) => {
 const dustbin = document.getElementById("dustbin");
 
 const removeTask = () => {
-    if (document.getElementById("newTask").checked) {
-        console.log("checked");
-    }
+    document.querySelectorAll('.checkbox input[type="checkbox"]');
+        // console.log("checked");
 }
 
 dustbin.addEventListener('click', () => {
@@ -59,7 +60,7 @@ dustbin.addEventListener('click', () => {
     document.getElementById("parent").style.pointerEvents = "none";
     document.getElementById("deleteDB").style.pointerEvents = "all";
     document.querySelector(".bg-cover").style.display = "flex";
-    // document.body.style.scrollBehavior = "none";
+    document.body.style.overflow = "hidden";
 
 })
 
@@ -71,7 +72,7 @@ document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => 
     document.getElementById("deleteDB").style.display = "";
     document.getElementById("parent").style.pointerEvents = "all";
     document.querySelector(".bg-cover").style.display = "none";
-    
+    document.body.style.overflow = "";
 })
 
 const inputName = document.getElementById("taskName");
@@ -82,15 +83,13 @@ let main = document.querySelector("main");
 let taskListing = document.createElement("ul");
 taskListing.classList.add("listings");
 main.appendChild(taskListing);
-// console.log(localStorage.getItem("taskName"));
 
-const savedName = localStorage.getItem("taskName");
-const savedDate = localStorage.getItem('taskDate');
-const savedDesc = localStorage.getItem('taskDesc');
 
-if (savedName) {
-    createTask(savedName, savedDate);
-}
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+tasks.forEach(task => {
+    createTask(task.name, task.date);
+})
+
 
 
 let nothingToShow = document.createElement("div");
@@ -98,24 +97,30 @@ nothingToShow.classList.add("no-task");
 nothingToShow.textContent = "No tasks added yet!";
 taskListing.appendChild(nothingToShow);
 
-if (taskListing.children.length == 1) {
+if (tasks.length === 0) {
     nothingToShow.style.display = "flex";
 }
 else {
     nothingToShow.style.display = "none";
 }
 
-formCreation.addEventListener('submit', () => {
-    // event.preventDefault();
-    createBox.style.animation = "popright 0.1s linear forwards";
+const saveTask = () => {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     
-    if (inputDesc.value === "") {inputDesc.value = "undefined";}
+    tasks.push({
+        name: inputName.value,
+        date: inputDate.value,
+        desc: inputDesc.value
+    });
     
-    localStorage.setItem('taskName', inputName.value);
-    localStorage.setItem('taskDate', inputDate.value);
-    localStorage.setItem('taskDesc', inputDesc.value);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-    createTask(savedName, savedDate);
+formCreation.addEventListener('submit', () => {
+    createBox.style.animation = "popright 0.1s linear forwards";
+    if (inputDesc.value === "") {inputDesc.value = "undefined";}
+    saveTask();
+    createTask(inputName.value, inputDate.value);
 })
 
 
