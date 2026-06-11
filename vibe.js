@@ -21,7 +21,7 @@ button[1].addEventListener("click", () => {
     document.body.style.overflow = "";
 })
 
-const createTask = (name, date) => {
+const createTask = (name, date, desc) => {
     let list = document.createElement("li");
     list.classList.add("item");
     
@@ -37,8 +37,14 @@ const createTask = (name, date) => {
     
     let label1 = document.createElement("label");
     let label2 = document.createElement("label");
+    let label3 = document.createElement("label");
     label1.textContent = name;
     label2.textContent = date;
+    label3.textContent = '[Show details]';
+    label3.style.display = "flex";
+    label3.style.justifyContent = "end";
+    label3.style.fontStyle = "italic";
+
     
     taskListing.appendChild(list);
     list.appendChild(cbox);
@@ -46,13 +52,16 @@ const createTask = (name, date) => {
     list.appendChild(content);
     content.appendChild(label1);
     content.appendChild(label2);
+    content.appendChild(label3);
 }
 
 const dustbin = document.getElementById("dustbin");
 
 const removeTask = () => {
-    document.querySelectorAll('.checkbox input[type="checkbox"]');
-        // console.log("checked");
+    let cb = document.querySelectorAll('.checkbox input[type="checkbox"]');
+    if (cb.checked) {
+        
+    }
 }
 
 dustbin.addEventListener('click', () => {
@@ -87,7 +96,7 @@ main.appendChild(taskListing);
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 tasks.forEach(task => {
-    createTask(task.name, task.date);
+    createTask(task.name, task.date, task.desc);
 })
 
 const refinedTimeForTask = () => {
@@ -132,7 +141,7 @@ formCreation.addEventListener('submit', () => {
     createBox.style.animation = "popright 0.1s linear forwards";
     if (inputDesc.value === "") {inputDesc.value = "undefined";}
     saveTask();
-    createTask(inputName.value, refinedTimeForTask());
+    createTask(inputName.value, refinedTimeForTask(), inputDesc.value);
 })
 
 

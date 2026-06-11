@@ -266,18 +266,28 @@ input[type="checkbox"]:checked::before {
 }
 
 .content label {
-    margin: 3%;
+    margin: 2%;
     font-family: "Roboto Condensed", sans-serif;
 }
 
 .content label:first-child {
     font-weight: 600;
     font-size: large;
+    padding: 5% 0 0 0;
+}
+
+.content label:nth-child(2) {
+    /* border: 1px solid; */
+    width: 100%;
+    font-weight: 600;
+    font-size: small;
+    letter-spacing: .8px;
 }
 
 .content label:last-child {
     font-weight: 400;
     font-size: medium;
+    cursor: pointer;
 }
 
 #createTask {
@@ -383,12 +393,6 @@ input[type="checkbox"]:checked::before {
     color: white;
 }
 
-label {
-    /* border: 1px solid; */
-    width: 100%;
-    font-weight: bold;
-    font-size: small;
-}
 
 footer {
     /* box-shadow: 0 -2px 1px black; */
