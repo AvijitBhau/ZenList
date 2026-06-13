@@ -21,31 +21,29 @@ button[1].addEventListener("click", () => {
     document.body.style.overflow = "";
 })
 
-const createTask = (name, date, desc) => {
+const createTask = (id, name, date, desc) => {
     let list = document.createElement("li");
     list.classList.add("item");
-    
+    list.dataset.id = id;
+
     let cbox = document.createElement("div");
     cbox.classList.add("checkbox");
-    
+
     let inputCheck = document.createElement("input");
     inputCheck.name = "tasks";
     inputCheck.type = "checkbox";
-    
+
     let content = document.createElement("div");
     content.classList.add("content");
-    
+
     let label1 = document.createElement("label");
     let label2 = document.createElement("label");
     let label3 = document.createElement("label");
     label1.textContent = name;
     label2.textContent = date;
     label3.textContent = '[Show details]';
-    label3.style.display = "flex";
-    label3.style.justifyContent = "end";
-    label3.style.fontStyle = "italic";
 
-    
+
     taskListing.appendChild(list);
     list.appendChild(cbox);
     cbox.appendChild(inputCheck);
@@ -57,11 +55,19 @@ const createTask = (name, date, desc) => {
 
 const dustbin = document.getElementById("dustbin");
 
+
 const removeTask = () => {
-    let cb = document.querySelectorAll('.checkbox input[type="checkbox"]');
-    if (cb.checked) {
-        
-    }
+    const idIsToDelete = [];
+    let checkBoxes = document.querySelectorAll('.checkbox input:checked');
+    checkBoxes.forEach(box => {
+        const li = box.closest("li");
+
+        idIsToDelete.push(
+            Number(li.dataset.id)
+        );
+        li.remove();
+    })
+    deleteTasks(idIsToDelete);
 }
 
 dustbin.addEventListener('click', () => {
@@ -75,6 +81,11 @@ dustbin.addEventListener('click', () => {
 
 document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => {
     removeTask();
+    document.getElementById("deleteDB").style.display = "none";
+    document.getElementById("parent").style.pointerEvents = "all";
+    document.querySelector(".bg-cover").style.display = "none";
+    document.body.style.overflow = "";
+    window.location.reload();
 })
 
 document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => {
@@ -94,9 +105,10 @@ taskListing.classList.add("listings");
 main.appendChild(taskListing);
 
 
-const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+/* Loading tasks from localeStorage */
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 tasks.forEach(task => {
-    createTask(task.name, task.date, task.desc);
+    createTask(task.id, task.name, task.date, task.desc);
 })
 
 const refinedTimeForTask = () => {
@@ -105,7 +117,7 @@ const refinedTimeForTask = () => {
         day: 'numeric',
         month: 'short',
         year: 'numeric',
-        hour: 'numeric', 
+        hour: 'numeric',
         minute: '2-digit'
     });
     return date;
@@ -117,47 +129,59 @@ nothingToShow.classList.add("no-task");
 nothingToShow.textContent = "No tasks added yet!";
 taskListing.appendChild(nothingToShow);
 
-if (tasks.length === 0) {
-    nothingToShow.style.display = "flex";
+const updateEmptyStatus = () => {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    if (tasks.length === 0) {
+        nothingToShow.style.display = "flex";
+    }
+    else {
+        nothingToShow.style.display = "none";
+    }
 }
-else {
-    nothingToShow.style.display = "none";
-}
+updateEmptyStatus();
 
 const saveTask = () => {
+    const id = Date.now();
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    
+
     tasks.push({
+        id,
         name: inputName.value,
         date: refinedTimeForTask(),
         desc: inputDesc.value
     });
-    
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    return id;
+}
+
+const deleteTasks = (idIsToDelete) => {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks = tasks.filter(task => !idIsToDelete.includes(task.id));
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
 
 formCreation.addEventListener('submit', () => {
     // event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
-    if (inputDesc.value === "") {inputDesc.value = "undefined";}
-    saveTask();
-    createTask(inputName.value, refinedTimeForTask(), inputDesc.value);
+    if (inputDesc.value === "") { inputDesc.value = "undefined"; }
+    const id = saveTask();
+    createTask(id, inputName.value, refinedTimeForTask(), inputDesc.value);
 })
-
 
 const navDate = document.querySelectorAll(".date p");
 
 const currentTime = () => {
-    const dayName = now.toLocaleString('default', {weekday: 'long'});
+    const dayName = now.toLocaleString('default', { weekday: 'long' });
     const day = String(now.getDate()).padStart(2, '0');
-    const month = now.toLocaleString('default', { month: 'long'});
+    const month = now.toLocaleString('default', { month: 'long' });
     const year = now.getFullYear();
     const time = now.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit'
         // second: '2-digit'
     });
-    
+
     navDate[0].textContent = `${dayName} | ${month} ${day}, ${year} | ${time}`;
 }
 

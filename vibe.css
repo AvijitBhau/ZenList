@@ -37,7 +37,7 @@ h3 i {
 }
 
 #deleteDB {
-    position: absolute;
+    position: fixed;
     border: 1px solid black;
     min-height: 15%;
     width: 70%;
@@ -58,7 +58,6 @@ h3 i {
     font-size: large;
     font-weight: 700;
     display: none;
-    /* transform: scale(0); */
     animation: popover 0.1s linear forwards;
 
 }
@@ -91,7 +90,7 @@ h3 i {
     right: 40px;
     bottom: 16vh;
     border-radius: 50%;
-    /* background-color: blue; */
+    background-color: blue;
     box-shadow: 0 1px 2px rgb(108, 108, 108);
 }
 
@@ -287,11 +286,14 @@ input[type="checkbox"]:checked::before {
 .content label:last-child {
     font-weight: 400;
     font-size: medium;
+    display: flex;
+    justify-content: end;
+    font-style: italic;
     cursor: pointer;
 }
 
 #createTask {
-    position: absolute;
+    position: fixed;
     border: 1px solid black;
     min-height: 90%;
     width: 90%;

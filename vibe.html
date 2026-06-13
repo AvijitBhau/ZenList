@@ -13,17 +13,16 @@
 </head>
 
 <body>
-    <div class="bg-cover"></div>
     <section id="createTask">
         <h2>CREATE NEW GOAL</h2>
         <div class="taskBox">
             <form action="" id="taskForm">
                 <label for="taskName">Name: <span style="color: red;">*</span> </label>
                 <input type="text" name="taskName" id="taskName" placeholder="Enter goal (eg. Physics Class)" required
-                    autocomplete="off"><br>
+                autocomplete="off"><br>
                 <label for="taskDate">Choose date and time: <span style="color: red;">*</span></label>
                 <input type="datetime-local" name="taskDate" id="taskDate" placeholder="Choose date and time"
-                    max="2026-12-31T23:59" required>
+                max="2026-12-31T23:59" required>
                 <label for="taskDesc">Description: </label>
                 <input type="text" name="taskDesc" id="taskDesc" placeholder="Enter details of your goal... (Optional) "><br>
                 <div class="btns">
@@ -34,6 +33,7 @@
         </div>
     </section>
     <div id="parent">
+        <div class="bg-cover"></div>
         <section id="deleteDB">
             <p>Are you sure you want to delete this task?</p>
             <div id="delbtns">
