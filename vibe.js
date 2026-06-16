@@ -105,12 +105,14 @@ document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => 
 })
 
 // const checkDustbin = () => {
-//     let checkBoxes = document.querySelectorAll('.checkbox input:checked');
+//     let checkBoxes = document.querySelectorAll('.checkbox input').checked;
 //     if (checkBoxes) {
-//         dustbin.style.pointerEvents = "none";
+//         // dustbin.style.pointerEvents = "none";
+//         document.getElementById("parent").style.backgroundColor = "red";
 //     }
 //     else {
-//         dustbin.style.pointerEvents = "all";
+//         // dustbin.style.pointerEvents = "all";
+//         document.getElementById("parent").style.backgroundColor = "black";
 //     }
 // }
 
@@ -224,6 +226,7 @@ const footerIconText = (settings) => {
         msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "Calender";
         msgToAdd[3].textContent = "Profile";
+        document.querySelectorAll(".icons i")[1].style.display = "none";
         settings.textContent = "Settings";
     }
     else if (window.matchMedia("(min-width: 768px)").matches) {
@@ -231,6 +234,7 @@ const footerIconText = (settings) => {
         msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "Calender";
         msgToAdd[3].textContent = "Profile";
+        document.querySelectorAll(".icons i")[1].style.display = "none";
         settings.textContent = "Settings";  
     }
     else {
