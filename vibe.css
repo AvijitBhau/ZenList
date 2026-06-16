@@ -83,28 +83,31 @@ h3 i {
 
 .overlay {
     position: fixed;
-    transform: scale(3.4);
+    width: 60px;
+    height: 60px;
     color: rgb(255, 255, 255);
     border: 0.7px solid rgb(48, 48, 48);
-    min-width: 5%;
-    max-width: 5%;
     right: 40px;
     bottom: 16vh;
     border-radius: 50%;
     background-color: blue;
     box-shadow: 0 1px 2px rgb(108, 108, 108);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .overlay p {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: red; */
-    background-color: rgb(0, 68, 0);
     margin: 0;
-    border-radius: 90%;
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgb(0, 68, 0);
     cursor: pointer;
+    font-size: 1.8rem;
 }
 
 header {
@@ -524,6 +527,10 @@ footer i:active,
         letter-spacing: 2px;
     }
 
+    .overlay p {
+        font-size: 3rem;
+    }
+
     .indicator {
         display: none;
     }
@@ -584,15 +591,20 @@ footer i:active,
     }
 
     .overlay {
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
-        width: 10%;
         background-color: #fff;
+        right: 50px;
+        bottom: 18vh;
     }
 
     .overlay p {
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
-        width: 30%;
-        height: 20px;
+        font-size: 4rem;
+        background-color: rgb(0, 68, 0);
     }
 
     #createTask {
