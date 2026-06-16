@@ -7,6 +7,7 @@ const createIcon = document.querySelectorAll(".overlay p");
 const button = document.querySelectorAll(".btns button");
 inputDate.min = formatted;
 
+/* When Create(+) is clicked, pops up with a creating a new goal page. */
 createIcon[0].addEventListener('click', () => {
     createBox.style.animation = "popup 0.1s linear forwards";
     document.body.style.pointerEvents = "none";
@@ -15,12 +16,14 @@ createIcon[0].addEventListener('click', () => {
     formCreation.reset();
 })
 
+/* On form submition page, when "cancel" button is clicked, this event runs; hiding the form. */
 button[1].addEventListener("click", () => {
     createBox.style.animation = "popcancel 0.1s linear forwards";
     document.body.style.pointerEvents = "all";
     document.body.style.overflow = "";
 })
 
+/* Creates each individual tasks based on its Id, Name, Date, Desc. */
 const createTask = (id, name, date, desc) => {
     let list = document.createElement("li");
     list.classList.add("item");
@@ -53,15 +56,16 @@ const createTask = (id, name, date, desc) => {
     content.appendChild(label3);
 }
 
-const dustbin = document.getElementById("dustbin");
 
-
+/* removeTask() removes the task selected by pressing the delete icon.
+It uses unique task-Ids to match and delete the tasks. */
+// Note: This function deletes the task from the webpage only.
 const removeTask = () => {
     const idIsToDelete = [];
     let checkBoxes = document.querySelectorAll('.checkbox input:checked');
     checkBoxes.forEach(box => {
         const li = box.closest("li");
-
+        
         idIsToDelete.push(
             Number(li.dataset.id)
         );
@@ -70,6 +74,9 @@ const removeTask = () => {
     deleteTasks(idIsToDelete);
 }
 
+const dustbin = document.getElementById("dustbin");
+
+/* Events works when the delete icon is clicked. */
 dustbin.addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "flex";
     document.getElementById("parent").style.pointerEvents = "none";
@@ -79,6 +86,7 @@ dustbin.addEventListener('click', () => {
 
 })
 
+/* Deletes the task which is selected based on matching task-Ids. */
 document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => {
     removeTask();
     document.getElementById("deleteDB").style.display = "none";
@@ -88,6 +96,7 @@ document.querySelectorAll("#delbtns button")[0].addEventListener('click', () => 
     window.location.reload();
 })
 
+/* Cancels the deletion of the tasks. */
 document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => {
     document.getElementById("deleteDB").style.display = "";
     document.getElementById("parent").style.pointerEvents = "all";
@@ -95,10 +104,23 @@ document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => 
     document.body.style.overflow = "";
 })
 
+// const checkDustbin = () => {
+//     let checkBoxes = document.querySelectorAll('.checkbox input:checked');
+//     if (checkBoxes) {
+//         dustbin.style.pointerEvents = "none";
+//     }
+//     else {
+//         dustbin.style.pointerEvents = "all";
+//     }
+// }
+
+// checkDustbin();
+
 const inputName = document.getElementById("taskName");
 const inputDesc = document.getElementById("taskDesc");
 const formCreation = document.getElementById("taskForm");
 
+/* Created a "ul" tag to store tasks within "li". */
 let main = document.querySelector("main");
 let taskListing = document.createElement("ul");
 taskListing.classList.add("listings");
@@ -111,6 +133,7 @@ tasks.forEach(task => {
     createTask(task.id, task.name, task.date, task.desc);
 })
 
+/* Formatting tasks - Date and time properly to display. */
 const refinedTimeForTask = () => {
     const dateForTask = new Date(inputDate.value);
     const date = dateForTask.toLocaleString('en-IN', {
@@ -123,7 +146,7 @@ const refinedTimeForTask = () => {
     return date;
 }
 
-
+/* Created an element to show "no tasks" when there isn't any tasks added to prevent blank spaces */
 let nothingToShow = document.createElement("div");
 nothingToShow.classList.add("no-task");
 nothingToShow.textContent = "No tasks added yet!";
@@ -140,6 +163,7 @@ const updateEmptyStatus = () => {
 }
 updateEmptyStatus();
 
+/* saveTask() saves the tasks to localeStorage as soon as it is submitted through the form. */
 const saveTask = () => {
     const id = Date.now();
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -154,13 +178,16 @@ const saveTask = () => {
     return id;
 }
 
+/* deleteTasks() deletes the task from the localeStorage. 
+whereas removeTask() deletes the task from webpage. */
 const deleteTasks = (idIsToDelete) => {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks = tasks.filter(task => !idIsToDelete.includes(task.id));
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-
+/* This event happens only when the submit button is clicked inside the form (while creating tasks).
+It creates tasks on webpage with createTask() and save it in localeStorage. */
 formCreation.addEventListener('submit', () => {
     // event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
@@ -169,6 +196,8 @@ formCreation.addEventListener('submit', () => {
     createTask(id, inputName.value, refinedTimeForTask(), inputDesc.value);
 })
 
+
+/* Sets the current time in a proper format */
 const navDate = document.querySelectorAll(".date p");
 
 const currentTime = () => {
@@ -187,7 +216,39 @@ const currentTime = () => {
 
 currentTime();
 
+/* This function sets the visiblity of "settings" icon in nav tray for big screens */
+const footerIconText = (settings) => {
+    let msgToAdd = document.querySelectorAll(".navbar i");
+    if (window.matchMedia("(min-width: 1200px)").matches) {
+        msgToAdd[0].textContent = "Home";
+        msgToAdd[1].style.display = "none";
+        msgToAdd[2].textContent = "Calender";
+        msgToAdd[3].textContent = "Profile";
+        settings.textContent = "Settings";
+    }
+    else if (window.matchMedia("(min-width: 768px)").matches) {
+        msgToAdd[0].textContent = "Home";
+        msgToAdd[1].style.display = "none";
+        msgToAdd[2].textContent = "Calender";
+        msgToAdd[3].textContent = "Profile";
+        settings.textContent = "Settings";  
+    }
+    else {
+        msgToAdd[0].textContent = "";
+        msgToAdd[2].textContent = "";
+        msgToAdd[3].textContent = "";
+        settings.style.display = "none";
+    }
+}
 
+/* Created new icon "settings" when screen is resized for bigger screens  */
+let navbar = document.querySelector(".navbar");
+let settings = document.createElement("i");
+settings.setAttribute('class', 'fa-solid fa-gear');
+navbar.appendChild(settings);
+footerIconText(settings);
+
+/* Sets an indicator tray for navigation icons to track which sections are currently opened. */
 const footerNav = document.querySelectorAll(".navbar i");
 const indicator = document.querySelector(".indicator");
 
@@ -205,3 +266,5 @@ footerNav.forEach(icons => {
     })
 })
 
+/* "Settings" icon in the navigation tray toggles wrt the screen size */
+window.addEventListener("resize", footerIconText);
