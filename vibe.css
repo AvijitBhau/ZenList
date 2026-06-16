@@ -669,6 +669,7 @@ footer i:active,
     footer i:active,
     .active {
         transform: scale(1.1);
+        text-shadow: 0 1px 1px rgb(0, 65, 9);
     }
 
     footer i {

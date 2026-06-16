@@ -104,20 +104,6 @@ document.querySelectorAll("#delbtns button")[1].addEventListener('click', () => 
     document.body.style.overflow = "";
 })
 
-// const checkDustbin = () => {
-//     let checkBoxes = document.querySelectorAll('.checkbox input').checked;
-//     if (checkBoxes) {
-//         // dustbin.style.pointerEvents = "none";
-//         document.getElementById("parent").style.backgroundColor = "red";
-//     }
-//     else {
-//         // dustbin.style.pointerEvents = "all";
-//         document.getElementById("parent").style.backgroundColor = "black";
-//     }
-// }
-
-// checkDustbin();
-
 const inputName = document.getElementById("taskName");
 const inputDesc = document.getElementById("taskDesc");
 const formCreation = document.getElementById("taskForm");
