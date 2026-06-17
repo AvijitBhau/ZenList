@@ -75,7 +75,6 @@ const createTask = (id, name, date, desc) => {
         document.body.style.overflow = "";
     })
 
-    
 
     taskListing.appendChild(list);
     list.appendChild(cbox);
@@ -85,8 +84,6 @@ const createTask = (id, name, date, desc) => {
     content.appendChild(label2);
     content.appendChild(label3);
 }
-
-
 
 
 /* removeTask() removes the task selected by pressing the delete icon.
@@ -209,7 +206,6 @@ const deleteTasks = (idIsToDelete) => {
 /* This event happens only when the submit button is clicked inside the form (while creating tasks).
 It creates tasks on webpage with createTask() and save it in localeStorage. */
 formCreation.addEventListener('submit', () => {
-    // event.preventDefault();
     createBox.style.animation = "popright 0.1s linear forwards";
     if (inputDesc.value === "") { inputDesc.value = "undefined"; }
     const id = saveTask();
@@ -228,7 +224,6 @@ const currentTime = () => {
     const time = now.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit'
-        // second: '2-digit'
     });
 
     navDate[0].textContent = `${dayName} | ${month} ${day}, ${year} | ${time}`;

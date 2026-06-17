@@ -9,7 +9,6 @@ body {
 }
 
 #parent {
-    /* background-color: red; */
     min-height: 90vh;
     min-width: auto;
 }
@@ -26,7 +25,6 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border: 2px solid red; */
 }
 
 h3 i {
@@ -113,12 +111,9 @@ header {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 0 10px rgb(126, 126, 126);
-    /* border: 2px solid red; */
-    /* width: calc(100vw - 10%); */
 }
 
 nav {
-    /* border: 2px solid red; */
     display: grid;
     grid-template-areas:
         "date icons"
@@ -126,7 +121,6 @@ nav {
 }
 
 .date {
-    /* border: 2px solid blue; */
     grid-area: date;
 }
 
@@ -136,7 +130,6 @@ nav {
 }
 
 .logo {
-    /* border: 2px solid green; */
     grid-area: logo;
     font-size: x-large;
 }
@@ -146,7 +139,6 @@ nav {
 }
 
 .icons {
-    /* border: 2px solid yellowgreen; */
     grid-area: icons;
     display: flex;
     align-items: center;
@@ -159,13 +151,11 @@ nav {
 }
 
 .fa-moon {
-    /* border: 2px solid gray; */
     border-radius: 50%;
     padding: 2%;
 }
 
 .fa-sun {
-    /* border: 2px solid white; */
     border-radius: 50%;
     padding: 2%;
     background-color: transparent;
@@ -229,7 +219,6 @@ ul {
 }
 
 .listings {
-    /* border: 2px solid red; */
     margin: 5% 2%;
     display: grid;
     grid-template-rows: auto;
@@ -269,7 +258,6 @@ ul {
 }
 
 .checkbox {
-    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -311,7 +299,6 @@ input[type="checkbox"]:checked::before {
 }
 
 .content {
-    /* border: 2px solid green; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -330,7 +317,6 @@ input[type="checkbox"]:checked::before {
 }
 
 .content label:nth-child(2) {
-    /* border: 1px solid; */
     width: 100%;
     font-weight: 600;
     font-size: small;
@@ -405,12 +391,9 @@ input[type="checkbox"]:checked::before {
     padding: 10% 0 5% 0;
     text-align: center;
     letter-spacing: .4px;
-    /* text-decoration: underline; */
 }
 
 .taskBox {
-    /* border: 2px solid red; */
-    /* min-height: 70vh; */
     margin: 20px;
     min-height: fit-content;
     padding: 40px 0 0 0;
@@ -426,7 +409,6 @@ input[type="checkbox"]:checked::before {
 }
 
 .btns {
-    /* border: 1px solid red; */
     margin: 30px;
     display: flex;
     flex-direction: column;
@@ -463,7 +445,6 @@ input[type="checkbox"]:checked::before {
     display: flex;
     flex-direction: column;
     transform: scale(0);
-    /* overflow: hidden; */
 }
 
 #description h2 {
@@ -472,7 +453,6 @@ input[type="checkbox"]:checked::before {
 
 #description div {
     margin: 10px 20px;
-    /* text-decoration: underline; */
 }
 
 .descBoxOkButton {
@@ -490,7 +470,6 @@ input[type="checkbox"]:checked::before {
 .tDescrip {
     min-height: 10vh;
     line-height: 1.5rem;
-    /* border: 2px solid; */
 }
 
 @keyframes zoomPopUp {
@@ -515,7 +494,6 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* border: 2px solid yellow; */
     background-color: #c0edca;
     border-radius: 20px;
 }
@@ -555,7 +533,6 @@ footer i:active,
         min-height: 90%;
         width: 95vw;
         margin: 20px;
-        /* left: 50%; */
         background-color: rgb(232, 255, 232);
         overflow-x: hidden;
         z-index: 1;
@@ -738,7 +715,6 @@ footer i:active,
         min-height: 90%;
         width: 97vw;
         margin: 20px;
-        /* left: 50%; */
         background-color: rgb(232, 255, 232);
         overflow-x: hidden;
         z-index: 1;
