@@ -308,6 +308,7 @@ window.addEventListener("resize", footerIconText);
 /* These functions toggles between the dark theme and the light theme. */
 const toggleDarkTheme = document.querySelector(".icons i");
 let isLightTheme = (localStorage.getItem('theme') || 'light') === 'light';
+
 const darkTheme = () => {
     document.body.style.backgroundColor = "#333333";
     main.style.color = "#fefff8";
@@ -362,7 +363,12 @@ const darkTheme = () => {
     document.querySelector(".descBoxOkButton button").style.backgroundColor = "transparent";
     document.querySelector(".descBoxOkButton button").style.color = "#c0edca";
     document.querySelector(".descBoxOkButton button").style.borderColor = "#c0edca";
-    
+    document.querySelector(".slider").style.backgroundColor = "#333333";
+    document.querySelector(".slider").style.borderColor = "#c0edca";
+    document.querySelector(".slider p").style.backgroundColor = "#c0edca";
+    document.querySelector(".slider p").style.color = "black";
+    document.querySelectorAll(".slider p")[1].style.backgroundColor = "#333333";
+    document.querySelectorAll(".slider p")[1].style.color = "#c0edca";
 }
 const lightTheme = () => {
     document.body.style.backgroundColor = "";
@@ -417,9 +423,15 @@ const lightTheme = () => {
     document.querySelector(".descBoxOkButton button").style.backgroundColor = "";
     document.querySelector(".descBoxOkButton button").style.color = "";
     document.querySelector(".descBoxOkButton button").style.borderColor = "";
+    document.querySelector(".slider").style.backgroundColor = "";
+    document.querySelector(".slider").style.borderColor = "";
+    document.querySelector(".slider p").style.backgroundColor = "";
+    document.querySelector(".slider p").style.color = "";
+    document.querySelectorAll(".slider p")[1].style.backgroundColor = "";
+    document.querySelectorAll(".slider p")[1].style.color = "";
 }
 
-// Apply saved theme on load
+/* Apply saved theme on load */
 if (localStorage.getItem('theme') === 'dark') {
     isLightTheme = false;
     darkTheme();
