@@ -8,10 +8,6 @@ body {
     user-select: none;
 }
 
-.icons i {
-    cursor: pointer;
-}
-
 #parent {
     /* background-color: red; */
     min-height: 90vh;
@@ -155,7 +151,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-size: large;
+    font-size: x-large;
+}
+
+.icons i {
+    cursor: pointer;
 }
 
 .fa-moon {
@@ -417,7 +417,6 @@ input[type="checkbox"]:checked::before {
 .btns button {
     padding: 10px 40px;
     width: 100%;
-    border: 1px solid rgb(62, 62, 62);
     cursor: pointer;
     border-radius: 20px;
     border: 2px solid darkgreen;
@@ -430,6 +429,59 @@ input[type="checkbox"]:checked::before {
     color: white;
 }
 
+#description {
+    border: 2px solid rgb(192, 190, 190);
+    position: fixed;
+    min-height: 40vh;
+    width: 80vw;;
+    background-color: #ecfbeb;
+    box-shadow: 0 0 15px rgb(112, 112, 112);
+    z-index: 6;
+    top: 25%;
+    left: 10%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0);
+    /* overflow: hidden; */
+}
+
+#description h2 {
+    text-align: center;
+}
+
+#description div {
+    margin: 10px 20px;
+    /* text-decoration: underline; */
+}
+
+.descBoxOkButton {
+    text-align: center;
+}
+
+.descBoxOkButton button {
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: large;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.tDescrip {
+    min-height: 10vh;
+    line-height: 1.5rem;
+    /* border: 2px solid; */
+}
+
+@keyframes zoomPopUp {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes zoomPopBack {
+    0% { transform: scale(1); }
+    100% { transform: scale(0); }
+}
 
 footer {
     position: fixed;
@@ -614,6 +666,15 @@ footer i:active,
 
     .taskBox form {
         transform: scale(1);
+    }
+
+    #description {
+        width: 35vw;
+        left: 35%;
+    }
+    
+    #description div {
+        margin: 10px 50px;
     }
 
 }

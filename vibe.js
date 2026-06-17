@@ -2,10 +2,21 @@
 const inputDate = document.getElementById("taskDate");
 const now = new Date();
 const formatted = now.toISOString().slice(0, 16);
+inputDate.min = formatted;
 const createBox = document.getElementById("createTask");
 const createIcon = document.querySelectorAll(".overlay p");
 const button = document.querySelectorAll(".btns button");
-inputDate.min = formatted;
+const description = document.getElementById("description");
+const descriptionName = description.querySelector(".tName");
+const descriptionDate = description.querySelector(".tDate");
+const descriptionDesc = description.querySelector(".tDescrip");
+
+const loadDescription = (name, date, desc) => {
+    descriptionName.innerHTML = `<strong>Name:</strong> ${name}`;
+    descriptionDate.innerHTML = `<strong>Due Date:</strong> ${date}`;
+    descriptionDesc.innerHTML = `<strong>Description:</strong> ${desc || "No description"}`;
+};
+
 
 /* When Create(+) is clicked, pops up with a creating a new goal page. */
 createIcon[0].addEventListener('click', () => {
@@ -45,7 +56,26 @@ const createTask = (id, name, date, desc) => {
     label1.textContent = name;
     label2.textContent = date;
     label3.textContent = '[Show details]';
+    label3.classList.add("show-datails");
 
+    label3.addEventListener('click', () => {
+        loadDescription(name, date, desc);
+        description.style.animation = "zoomPopUp .1s linear forwards";
+        document.getElementById("parent").style.pointerEvents = "none";
+        document.getElementById("deleteDB").style.pointerEvents = "all";
+        document.querySelector(".bg-cover").style.display = "flex";
+        document.body.style.overflow = "hidden";
+    });
+    
+    document.getElementById("okBtn").addEventListener("click", () => {
+        description.style.animation = "zoomPopBack .1s linear forwards";
+        document.getElementById("parent").style.pointerEvents = "";
+        document.getElementById("deleteDB").style.pointerEvents = "";
+        document.querySelector(".bg-cover").style.display = "";
+        document.body.style.overflow = "";
+    })
+
+    
 
     taskListing.appendChild(list);
     list.appendChild(cbox);
@@ -55,6 +85,8 @@ const createTask = (id, name, date, desc) => {
     content.appendChild(label2);
     content.appendChild(label3);
 }
+
+
 
 
 /* removeTask() removes the task selected by pressing the delete icon.
@@ -324,7 +356,12 @@ const darkTheme = () => {
     document.querySelectorAll('#delbtns button')[1].style.backgroundColor = "transparent";
     document.querySelectorAll('#delbtns button')[1].style.color = "#c0edca";
     document.querySelectorAll('#delbtns button')[1].style.borderColor = "#c0edca";
-    
+    description.style.backgroundColor = "#333333";
+    description.style.borderColor = "#c0edca";
+    description.style.color = "#c0edca";
+    document.querySelector(".descBoxOkButton button").style.backgroundColor = "transparent";
+    document.querySelector(".descBoxOkButton button").style.color = "#c0edca";
+    document.querySelector(".descBoxOkButton button").style.borderColor = "#c0edca";
     
 }
 const lightTheme = () => {
@@ -374,6 +411,12 @@ const lightTheme = () => {
     document.querySelectorAll('#delbtns button')[1].style.backgroundColor = "";
     document.querySelectorAll('#delbtns button')[1].style.color = "";
     document.querySelectorAll('#delbtns button')[1].style.borderColor = "";
+    description.style.backgroundColor = "";
+    description.style.borderColor = "";
+    description.style.color = "";
+    document.querySelector(".descBoxOkButton button").style.backgroundColor = "";
+    document.querySelector(".descBoxOkButton button").style.color = "";
+    document.querySelector(".descBoxOkButton button").style.borderColor = "";
 }
 
 // Apply saved theme on load
