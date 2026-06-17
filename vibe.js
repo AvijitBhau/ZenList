@@ -243,6 +243,20 @@ const indicator = document.querySelector(".indicator");
 const moveIndicator = (button) => {
     indicator.style.left = button.offsetLeft + (button.offsetWidth - indicator.offsetWidth) / 2 + "px";
 }
+
+/* Helper function to apply glow to active icon in dark theme */
+const updateActiveIconGlow = () => {
+    if (!isLightTheme) {
+        document.querySelectorAll(".navbar i").forEach(icon => {
+            if (icon.classList.contains("active")) {
+                icon.style.textShadow = "0 0 15px #c0edca";
+            } else {
+                icon.style.textShadow = "";
+            }
+        });
+    }
+}
+
 moveIndicator(document.querySelector(".active"));
 footerNav.forEach(icons => {
     icons.addEventListener('click', () => {
@@ -251,6 +265,7 @@ footerNav.forEach(icons => {
         })
         icons.classList.add("active");
         moveIndicator(icons);
+        updateActiveIconGlow();
     })
 })
 
@@ -260,7 +275,7 @@ window.addEventListener("resize", footerIconText);
 
 /* These functions toggles between the dark theme and the light theme. */
 const toggleDarkTheme = document.querySelector(".icons i");
-let isLightTheme = true;
+let isLightTheme = (localStorage.getItem('theme') || 'light') === 'light';
 const darkTheme = () => {
     document.body.style.backgroundColor = "#333333";
     main.style.color = "#fefff8";
@@ -269,9 +284,47 @@ const darkTheme = () => {
     })
     taskListing.style.color = "#fefff8";
     dustbin.style.color = "white";
-    document.querySelector("header").style.backgroundColor = "#093200";
+    document.querySelector("header").style.backgroundColor = "rgb(35, 46, 33)";
     document.querySelector("header").style.color = "white";
-    // document.querySelector(".slider p").style.backgroundColor = "#093200";
+    nothingToShow.style.backgroundColor = "#1a1919";
+    nothingToShow.style.color = "#fefff8";
+    document.querySelector(".overlay p").style.backgroundColor = "#c0edca";
+    document.querySelector(".overlay p").style.color = "rgb(35, 46, 33)";
+    document.querySelector(".overlay").style.boxShadow = "0 0 20px #c0edca";
+    document.querySelector(".navbar").style.backgroundColor = "rgb(35, 46, 33)";
+    document.querySelectorAll(".navbar i").forEach(icon => {
+        icon.style.color = "white";
+    });
+    updateActiveIconGlow();
+    document.getElementById("createTask").style.color = "#c0edca";
+    document.getElementById("createTask").style.backgroundColor = "#333333";
+    document.getElementById("createTask").style.borderColor = "#c0edca";
+    document.querySelectorAll("#taskForm input").forEach(inputColorChanger => {
+        inputColorChanger.style.backgroundColor = "black";
+        inputColorChanger.style.border = "1px solid #c0edca";
+        inputColorChanger.style.borderRadius = "2px";
+        inputColorChanger.style.color = "white";
+        inputColorChanger.style.colorScheme = "dark";
+    });
+    document.querySelector('.btns button[type="submit"]').style.backgroundColor = "#c0edca";
+    document.querySelector('.btns button[type="submit"]').style.color = "black";
+    document.querySelector('.btns button[type="reset"]').style.backgroundColor = "transparent";
+    document.querySelector('.btns button[type="reset"]').style.color = "#c0edca";
+    document.querySelector('.btns button[type="reset"]').style.borderColor = "#c0edca";
+    document.querySelector(".indicator").style.backgroundColor = "#c0edca";
+    document.querySelectorAll('.checkbox input[type="checkbox"]').forEach(checkBoxColor => {
+        checkBoxColor.style.borderColor = "#c0edca";
+    });
+    document.getElementById("deleteDB").style.backgroundColor = "#333333";
+    document.getElementById("deleteDB").style.borderColor = "#c0edca";
+    document.getElementById("deleteDB").style.color = "#eaf1ec";
+    document.querySelector('#delbtns button[type="submit"]').style.backgroundColor = "#c0edca";
+    document.querySelector('#delbtns button[type="submit"]').style.color = "black";
+    document.querySelector('#delbtns button[type="submit"]').style.borderColor = "#c0edca";
+    document.querySelectorAll('#delbtns button')[1].style.backgroundColor = "transparent";
+    document.querySelectorAll('#delbtns button')[1].style.color = "#c0edca";
+    document.querySelectorAll('#delbtns button')[1].style.borderColor = "#c0edca";
+    
     
 }
 const lightTheme = () => {
@@ -284,6 +337,56 @@ const lightTheme = () => {
     dustbin.style.color = "";
     document.querySelector("header").style.backgroundColor = "";
     document.querySelector("header").style.color = "";
+    nothingToShow.style.backgroundColor = "";
+    nothingToShow.style.color = "";
+    document.querySelector(".overlay p").style.backgroundColor = "";
+    document.querySelector(".overlay p").style.color = "";
+    document.querySelector(".overlay").style.boxShadow = "";
+    document.querySelector(".navbar").style.backgroundColor = "";
+    document.querySelectorAll(".navbar i").forEach(icon => {
+        icon.style.color = "";
+    });
+    document.getElementById("createTask").style.color = "";
+    document.getElementById("createTask").style.backgroundColor = "";
+    document.getElementById("createTask").style.borderColor = "";
+    document.querySelectorAll("#taskForm input").forEach(inputColorChanger => {
+        inputColorChanger.style.backgroundColor = "";
+        inputColorChanger.style.border = "";
+        inputColorChanger.style.borderRadius = "";
+        inputColorChanger.style.color = "";
+        inputColorChanger.style.colorScheme = "";
+    });
+    document.querySelector('.btns button[type="submit"]').style.backgroundColor = "";
+    document.querySelector('.btns button[type="submit"]').style.color = "";
+    document.querySelector('.btns button[type="reset"]').style.backgroundColor = "";
+    document.querySelector('.btns button[type="reset"]').style.color = "";
+    document.querySelector('.btns button[type="reset"]').style.borderColor = "";
+    document.querySelector(".indicator").style.backgroundColor = "";
+    document.querySelectorAll('.checkbox input[type="checkbox"]').forEach(checkBoxColor => {
+        checkBoxColor.style.borderColor = "";
+    });
+    document.getElementById("deleteDB").style.backgroundColor = "";
+    document.getElementById("deleteDB").style.borderColor = "";
+    document.getElementById("deleteDB").style.color = "";
+    document.querySelector('#delbtns button[type="submit"]').style.backgroundColor = "";
+    document.querySelector('#delbtns button[type="submit"]').style.color = "";
+    document.querySelector('#delbtns button[type="submit"]').style.borderColor = "";
+    document.querySelectorAll('#delbtns button')[1].style.backgroundColor = "";
+    document.querySelectorAll('#delbtns button')[1].style.color = "";
+    document.querySelectorAll('#delbtns button')[1].style.borderColor = "";
+}
+
+// Apply saved theme on load
+if (localStorage.getItem('theme') === 'dark') {
+    isLightTheme = false;
+    darkTheme();
+    toggleDarkTheme.classList.remove('fa-moon');
+    toggleDarkTheme.classList.add('fa-sun');
+} else {
+    isLightTheme = true;
+    lightTheme();
+    toggleDarkTheme.classList.remove('fa-sun');
+    toggleDarkTheme.classList.add('fa-moon');
 }
 
 toggleDarkTheme.addEventListener("click", () => {
@@ -304,4 +407,5 @@ toggleDarkTheme.addEventListener("click", () => {
         }, 300);
     }
     isLightTheme = !isLightTheme;
+    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
 })
