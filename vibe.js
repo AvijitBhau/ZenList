@@ -212,7 +212,6 @@ const footerIconText = (settings) => {
         msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "Calender";
         msgToAdd[3].textContent = "Profile";
-        document.querySelectorAll(".icons i")[1].style.display = "none";
         settings.textContent = "Settings";
     }
     else if (window.matchMedia("(min-width: 768px)").matches) {
@@ -220,14 +219,13 @@ const footerIconText = (settings) => {
         msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "Calender";
         msgToAdd[3].textContent = "Profile";
-        document.querySelectorAll(".icons i")[1].style.display = "none";
         settings.textContent = "Settings";  
     }
     else {
         msgToAdd[0].textContent = "";
+        msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "";
         msgToAdd[3].textContent = "";
-        settings.style.display = "none";
     }
 }
 
@@ -258,3 +256,52 @@ footerNav.forEach(icons => {
 
 /* "Settings" icon in the navigation tray toggles wrt the screen size */
 window.addEventListener("resize", footerIconText);
+
+
+/* These functions toggles between the dark theme and the light theme. */
+const toggleDarkTheme = document.querySelector(".icons i");
+let isLightTheme = true;
+const darkTheme = () => {
+    document.body.style.backgroundColor = "#333333";
+    main.style.color = "#fefff8";
+    document.querySelectorAll(".listings li").forEach(task => {
+        task.style.backgroundColor = "#1a1919";
+    })
+    taskListing.style.color = "#fefff8";
+    dustbin.style.color = "white";
+    document.querySelector("header").style.backgroundColor = "#093200";
+    document.querySelector("header").style.color = "white";
+    // document.querySelector(".slider p").style.backgroundColor = "#093200";
+    
+}
+const lightTheme = () => {
+    document.body.style.backgroundColor = "";
+    main.style.color = "";
+    document.querySelectorAll(".listings li").forEach(task => {
+        task.style.backgroundColor = "";
+    })
+    taskListing.style.color = "";
+    dustbin.style.color = "";
+    document.querySelector("header").style.backgroundColor = "";
+    document.querySelector("header").style.color = "";
+}
+
+toggleDarkTheme.addEventListener("click", () => {
+    if (isLightTheme) {
+        toggleDarkTheme.style.animation = "ghumar .5s linear forwards";
+        setTimeout(() => {
+            darkTheme();
+            toggleDarkTheme.classList.remove("fa-moon");
+            toggleDarkTheme.classList.add("fa-sun");
+        }, 300);
+    }
+    else {
+        toggleDarkTheme.style.animation = "ghumar1 .7s linear forwards";
+        setTimeout(() => {
+            lightTheme();
+            toggleDarkTheme.classList.remove("fa-sun");
+            toggleDarkTheme.classList.add("fa-moon");
+        }, 300);
+    }
+    isLightTheme = !isLightTheme;
+})

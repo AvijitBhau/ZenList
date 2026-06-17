@@ -158,6 +158,31 @@ nav {
     font-size: large;
 }
 
+.fa-moon {
+    border: 2px solid gray;
+    border-radius: 50%;
+    padding: 2%;
+}
+
+.fa-sun {
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 2%;
+    background-color: transparent;
+    color: white;
+}
+
+@keyframes ghumar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-180deg); }
+}
+
+@keyframes ghumar1 {
+    0% { transform: rotate(-180deg); }
+    100% { transform: rotate(-360deg); }
+    
+}
+
 header {
     padding: 5%;
 }
