@@ -66,7 +66,7 @@ const createTask = (id, name, date, desc) => {
         document.querySelector(".bg-cover").style.display = "flex";
         document.body.style.overflow = "hidden";
     });
-    
+
     document.getElementById("okBtn").addEventListener("click", () => {
         description.style.animation = "zoomPopBack .1s linear forwards";
         document.getElementById("parent").style.pointerEvents = "";
@@ -94,7 +94,7 @@ const removeTask = () => {
     let checkBoxes = document.querySelectorAll('.checkbox input:checked');
     checkBoxes.forEach(box => {
         const li = box.closest("li");
-        
+
         idIsToDelete.push(
             Number(li.dataset.id)
         );
@@ -246,7 +246,7 @@ const footerIconText = (settings) => {
         msgToAdd[1].style.display = "none";
         msgToAdd[2].textContent = "Calender";
         msgToAdd[3].textContent = "Profile";
-        settings.textContent = "Settings";  
+        settings.textContent = "Settings";
     }
     else {
         msgToAdd[0].textContent = "";
